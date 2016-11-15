@@ -23,6 +23,14 @@ public class Principal {
 		
 		analisadorSintatico.mostraArvore();
 		
+		AnalisadorSemantico analisadorSemantico = new AnalisadorSemantico(analisadorSintatico.getRaiz(), analisadorLexico.getSimbolos());
+		analisadorSemantico.analisar();
 		
+		if (analisadorSemantico.temErros()) {
+			analisadorSemantico.mostraErros();
+			System.exit(0);
+		}
+		
+		System.out.println("Correu tudo como esperado!!! OBRIGADO PELA ATENÇÃO :)");
 	}
 }
