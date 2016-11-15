@@ -18,6 +18,8 @@ public class AnalisadorSemantico {
 	public void analisar() {
 		analisar(raiz);
 	}
+	
+
 
 	private Object analisar(No no) {
 		if (no.getTipo().equals("NO_LIST_CMD")) {
@@ -100,9 +102,11 @@ public class AnalisadorSemantico {
 		
 		for (Token id : listId) {
 			if (simbolo.getTipo() != null) {
+				
 				erros.add("id redeclarado"+id);
 			} else {
 				simbolo.setTipo(tipo);
+				System.out.println("Passei aqui = " + simbolo.getTipo());
 			}
 		}
 		return null;

@@ -3,7 +3,8 @@
 
 { int i n fat }
 { mostra "Entre n:" }
-{ le n }
+{ le a }
+# { le n }
 { se { < n 0 }
   { 
     { mostra " Entre valor valido " }
