@@ -12,7 +12,7 @@ public class AnalisadorSemantico {
 
 	public AnalisadorSemantico(No raiz, List<Simbolo> simbolos) {
 		this.raiz = raiz;
-		this.simbolos = simbolos;
+		this.setSimbolos(simbolos);
 	}
 
 	public void analisar() {
@@ -60,6 +60,9 @@ public class AnalisadorSemantico {
 			return opArit(no);
 		} else if (no.getTipo().equals("NO_OPERAN")) {
 			return operan(no);
+		} else if (no.getTipo().equals("NO_TOKEN")) {
+			System.out.println(no.getToken().toString());
+			return null;
 		} else {
 			System.err.println("No desconhecido" + no.getTipo());
 			return null;
@@ -91,6 +94,7 @@ public class AnalisadorSemantico {
 	// <decl> ::= <tipo> <list_id>
 	private Object decl(No no) {
 		String tipo = (String) analisar(no.getFilhos().get(0));
+		@SuppressWarnings("unchecked")
 		List<Token> listId = (List<Token>) analisar(no.getFilhos().get(1));
 
 		
@@ -111,6 +115,7 @@ public class AnalisadorSemantico {
 
 	// <list_id> ::= id <list_id2>
 	private Object listId(No no) {
+		@SuppressWarnings("unchecked")
 		List<Token> listId2 = (List<Token>) analisar(no.getFilhos().get(1));
 		Token id = no.getFilhos().get(0).getToken();
 		listId2.add(0,id);
@@ -229,6 +234,14 @@ public class AnalisadorSemantico {
 		for (String erro : erros) {
 			System.out.println(erro);
 		}
+	}
+
+	public List<Simbolo> getSimbolos() {
+		return simbolos;
+	}
+
+	public void setSimbolos(List<Simbolo> simbolos) {
+		this.simbolos = simbolos;
 	}
 	
 	
