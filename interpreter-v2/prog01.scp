@@ -1,0 +1,23 @@
+# prog01 - fatorial em SCP
+# SCP (Script de chaves em portugues)
+
+{ int i n fat }
+{ mostra "Entre n:" }
+{ le a }
+{ se { < n 0 }
+  { 
+    { mostra " Entre valor valido " }
+  }
+  {
+    { = i 1 }
+    { = fat 1 }
+    { enquanto { <= i n }
+      { = fat { * fat i } }
+      { = i { + i 1 } }
+    }
+    { = s1 { . "fat= " fat } }
+    { mostra s1 }
+  }
+}
+{ real r1 }
+{ = r1 2.34 }
