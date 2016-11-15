@@ -8,6 +8,7 @@ public class AnalisadorSemantico {
 	private No raiz;
 	private List<Simbolo> simbolos;
 	private List<String> erros = new ArrayList<>();
+	private Simbolo simbolo;
 
 	public AnalisadorSemantico(No raiz, List<Simbolo> simbolos) {
 		this.raiz = raiz;
@@ -60,7 +61,7 @@ public class AnalisadorSemantico {
 		} else if (no.getTipo().equals("NO_OPERAN")) {
 			return operan(no);
 		} else {
-			System.err.println("No desconhecido" + no);
+			System.err.println("No desconhecido" + no.getTipo());
 			return null;
 		}
 	}
@@ -94,10 +95,10 @@ public class AnalisadorSemantico {
 
 		
 		for (Token id : listId) {
-			if (simbolos.test != null) {
+			if (simbolo.getTipo() != null) {
 				erros.add("id redeclarado"+id);
 			} else {
-				simbolos.setTipo(id, tipo);
+				simbolo.setTipo(tipo);
 			}
 		}
 		return null;
@@ -127,56 +128,65 @@ public class AnalisadorSemantico {
 
 	// <leitura> ::= 'le' id
 	private Object leitura(No no) {
-		// TODO Auto-generated method stub
+		analisar(no.getFilhos().get(0));
+		analisar(no.getFilhos().get(1));
 		return null;
 	}
 
 	// <escrita> ::= 'mostra' <operan>
 	private Object escrita(No no) {
-		// TODO Auto-generated method stub
+		analisar(no.getFilhos().get(0));
+		analisar(no.getFilhos().get(1));
 		return null;
 	}
 
 	// <cond> ::= 'se' <exp_log> '{' <list_cmd> '}' <senao>
 	private Object cond(No no) {
-		// TODO Auto-generated method stub
+		analisar(no.getFilhos().get(0));
+		analisar(no.getFilhos().get(1));
+		analisar(no.getFilhos().get(2));
+		analisar(no.getFilhos().get(3));
 		return null;
 	}
 
 	// <senao> ::= '{' <list_cmd> '}' |
 	private Object senao(No no) {
-		// TODO Auto-generated method stub
+		analisar(no.getFilhos().get(0));
 		return null;
 	}
 
 	// <laco> ::= 'enquanto' <exp_log> <list_cmd>
 	private Object laco(No no) {
-		// TODO Auto-generated method stub
+		analisar(no.getFilhos().get(0));
+		analisar(no.getFilhos().get(1));
+		analisar(no.getFilhos().get(2));
 		return null;
 	}
 
 	// <exp_log> ::= '{' <exp_rel> '}'
 	private Object expLog(No no) {
-		// TODO Auto-generated method stub
+		analisar(no.getFilhos().get(0));
 		return null;
 	}
 
 	// <exp_rel> ::= <op_rel> <operan> <operan> | <op_log> '{' <exp_rel> '}' '{'
 		// <exp_rel> '}'
 	private Object expRel(No no) {
-		// TODO Auto-generated method stub
+		analisar(no.getFilhos().get(0));
+		analisar(no.getFilhos().get(1));
+		analisar(no.getFilhos().get(2));
 		return null;
 	}
 
 	// <op_log> ::= '&&' | '||'
 	private Object opLog(No no) {
-		// TODO Auto-generated method stub
+		analisar(no.getFilhos().get(0));
 		return null;
 	}
 
 	// <op_rel> ::= '>' | '<' | '>=' | '<=' | '==' | '!='
 	private Object opRel(No no) {
-		// TODO Auto-generated method stub
+		analisar(no.getFilhos().get(0));
 		return null;
 	}
 
@@ -190,7 +200,9 @@ public class AnalisadorSemantico {
 
 	// <exp_arit> ::= <operan> | '{' <op_arit> <exp_arit> <exp_arit> '}'
 	private Object expArit(No no) {
-		// TODO Auto-generated method stub
+		analisar(no.getFilhos().get(0));
+		analisar(no.getFilhos().get(1));
+		analisar(no.getFilhos().get(2));
 		return null;
 	}
 
@@ -203,7 +215,7 @@ public class AnalisadorSemantico {
 
 	// <operan> ::= id | cli | clr | cls
 	private Object operan(No no) {
-		// TODO Auto-generated method stub
+		analisar(no.getFilhos().get(0));
 		return null;
 	}
 
