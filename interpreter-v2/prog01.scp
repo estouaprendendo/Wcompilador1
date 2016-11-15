@@ -2,6 +2,7 @@
 # SCP (Script de chaves em portugues)
 
 { int i n fat }
+{ int i }
 { mostra "Entre n:" }
 { le a }
 { se { < n 0 }
